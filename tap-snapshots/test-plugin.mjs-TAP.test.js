@@ -7,8 +7,8 @@
 'use strict'
 exports[`test/plugin.mjs TAP plugin() - advanced module - should replace normalize.css with CDN URL > advanced example 1`] = `
 
-  @import url(normalize.css);
-  @import url("normalize.css");
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
 
 `

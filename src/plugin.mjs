@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
 import postcss from 'postcss';
+import parseCssUrls from 'css-url-parser';
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
 
@@ -75,7 +76,16 @@ export default postcss.plugin(
             });
 
             root.walkAtRules('import', (decl) => {
-                const key = decl.params.replace(/["']/g, '');
+                let key;
+                // First check if it's possibly using syntax like url()
+                const parsedUrls = parseCssUrls(decl.params);
+                if (parsedUrls.length > 0) {
+                    // eslint-disable-next-line prefer-destructuring
+                    key = parsedUrls[0];
+                } else {
+                    // Handle the common cases where it's not wrapped in url() but may have quotes
+                    key = decl.params.replace(/["']/g, '');
+                }
 
                 if (mapping.has(key)) {
                     // eslint-disable-next-line no-param-reassign
