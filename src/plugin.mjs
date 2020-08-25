@@ -3,8 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
-
-const postcss = require('postcss');
+import postcss from 'postcss';
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
 
@@ -44,7 +43,7 @@ async function fetchImportMaps(urls = []) {
 }
 
 export default postcss.plugin(
-    'postcss-reverse-props',
+    '@eik/postcss-import-map',
     ({
         path: eikPath = path.join(process.cwd(), 'eik.json'),
         urls = [],
