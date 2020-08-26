@@ -24,3 +24,12 @@ exports[`test/plugin.js TAP plugin() - simple module - should replace normalize.
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
 
 `
+
+exports[`test/plugin.js TAP plugin() - webpack module - should replace normalize.css with CDN URL > webpack example 1`] = `
+
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+
+`

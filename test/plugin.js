@@ -10,6 +10,12 @@ const advanced = `
   @import url("normalize.css");
   @import "normalize.css";
 `;
+const webpack = `
+  @import '~normalize.css';
+  @import url(~normalize.css);
+  @import url("~normalize.css");
+  @import "~normalize.css";
+`;
 
 /*
  * When running tests on Windows, the output code get some extra \r on each line.
@@ -62,6 +68,22 @@ tap.test(
         ).process(advanced, { from: undefined });
 
         t.matchSnapshot(clean(css), 'advanced example');
+        t.end();
+    }
+);
+
+tap.test(
+    'plugin() - webpack module - should replace normalize.css with CDN URL',
+    async (t) => {
+        const { css } = await postcss(
+            plugin({
+                imports: {
+                    'normalize.css': 'https://unpkg.com/normalize.css@8/normalize.css',
+                },
+            })
+        ).process(webpack, { from: undefined });
+
+        t.matchSnapshot(clean(css), 'webpack example');
         t.end();
     }
 );

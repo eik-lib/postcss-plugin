@@ -87,6 +87,9 @@ export default postcss.plugin(
                     key = decl.params.replace(/["']/g, '');
                 }
 
+                // Webpack interop
+                key = key.replace(/^~/, '');
+
                 if (mapping.has(key)) {
                     // eslint-disable-next-line no-param-reassign
                     decl.params = `'${mapping.get(key)}'`;
