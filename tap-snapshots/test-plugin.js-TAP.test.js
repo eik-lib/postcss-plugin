@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/plugin.mjs TAP plugin() - advanced module - should replace normalize.css with CDN URL > advanced example 1`] = `
+exports[`test/plugin.js TAP plugin() - advanced module - should replace normalize.css with CDN URL > advanced example 1`] = `
 
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
@@ -13,13 +13,13 @@ exports[`test/plugin.mjs TAP plugin() - advanced module - should replace normali
 
 `
 
-exports[`test/plugin.mjs TAP plugin() - import values is an Array - should use the first entry in the Array > first array entry 1`] = `
+exports[`test/plugin.js TAP plugin() - import values is an Array - should use the first entry in the Array > first array entry 1`] = `
 
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
 
 `
 
-exports[`test/plugin.mjs TAP plugin() - simple module - should replace normalize.css with CDN URL > simple example 1`] = `
+exports[`test/plugin.js TAP plugin() - simple module - should replace normalize.css with CDN URL > simple example 1`] = `
 
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
 
