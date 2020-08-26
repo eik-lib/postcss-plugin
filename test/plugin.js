@@ -18,69 +18,69 @@ const advanced = `
 const clean = (str) => str.split('\r').join('');
 
 tap.test(
-  'plugin() - target is not an absolute URL - should reject process',
-  (t) => {
-    t.rejects(
-      postcss(
-        plugin({
-          imports: {
-            foo: './foo',
-          },
-        })
-      ).process(simple, { from: undefined }),
-      new Error('Target for import specifier must be an absolute URL.')
-    );
-    t.end();
-  }
+    'plugin() - target is not an absolute URL - should reject process',
+    (t) => {
+        t.rejects(
+            postcss(
+                plugin({
+                    imports: {
+                        foo: './foo',
+                    },
+                })
+            ).process(simple, { from: undefined }),
+            new Error('Target for import specifier must be an absolute URL.')
+        );
+        t.end();
+    }
 );
 
 tap.test(
-  'plugin() - simple module - should replace normalize.css with CDN URL',
-  async (t) => {
-    const { css } = await postcss(
-      plugin({
-        imports: {
-          'normalize.css': 'https://unpkg.com/normalize.css@8/normalize.css',
-        },
-      })
-    ).process(simple, { from: undefined });
+    'plugin() - simple module - should replace normalize.css with CDN URL',
+    async (t) => {
+        const { css } = await postcss(
+            plugin({
+                imports: {
+                    'normalize.css': 'https://unpkg.com/normalize.css@8/normalize.css',
+                },
+            })
+        ).process(simple, { from: undefined });
 
-    t.matchSnapshot(clean(css), 'simple example');
-    t.end();
-  }
+        t.matchSnapshot(clean(css), 'simple example');
+        t.end();
+    }
 );
 
 tap.test(
-  'plugin() - advanced module - should replace normalize.css with CDN URL',
-  async (t) => {
-    const { css } = await postcss(
-      plugin({
-        imports: {
-          'normalize.css': 'https://unpkg.com/normalize.css@8/normalize.css',
-        },
-      })
-    ).process(advanced, { from: undefined });
+    'plugin() - advanced module - should replace normalize.css with CDN URL',
+    async (t) => {
+        const { css } = await postcss(
+            plugin({
+                imports: {
+                    'normalize.css': 'https://unpkg.com/normalize.css@8/normalize.css',
+                },
+            })
+        ).process(advanced, { from: undefined });
 
-    t.matchSnapshot(clean(css), 'advanced example');
-    t.end();
-  }
+        t.matchSnapshot(clean(css), 'advanced example');
+        t.end();
+    }
 );
 
 tap.test(
-  'plugin() - import values is an Array - should use the first entry in the Array',
-  async (t) => {
-    const { css } = await postcss(
-      plugin({
-        imports: {
-          'normalize.css': [
-            'https://unpkg.com/normalize.css@8/normalize.css',
-            'https://unpkg.com/normalize.css@7/normalize.css',
-          ],
-        },
-      })
-    ).process(simple, { from: undefined });
+    'plugin() - import values is an Array - should use the first entry in the Array',
+    async (t) => {
+        const { css } = await postcss(
+            plugin({
+                imports: {
+                    'normalize.css': [
+                        'https://unpkg.com/normalize.css@8/normalize.css',
+                        'https://unpkg.com/normalize.css@7/normalize.css',
+                    ],
+                },
+            })
+        ).process(simple, { from: undefined });
 
-    t.matchSnapshot(clean(css), 'first array entry');
-    t.end();
-  }
+        t.matchSnapshot(clean(css), 'first array entry');
+        t.end();
+    }
 );
