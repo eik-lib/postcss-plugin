@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
-const postcss = require('postcss');
 const parseCssUrls = require('css-url-parser');
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
@@ -88,9 +87,9 @@ module.exports = ({ path, urls, imports } = {}) => {
     const mapFetch = populateImportMap({ path, urls, imports });
     return {
         postcssPlugin: '@eik/postcss-import-map',
-        async Once(root) {
-            await mapFetch;
-            root.walkAtRules('import', (decl) => {
+        AtRule: {
+            import: async (decl) => {
+                await mapFetch;
                 let key;
                 // First check if it's possibly using syntax like url()
                 const parsedUrls = parseCssUrls(decl.params);
@@ -109,7 +108,7 @@ module.exports = ({ path, urls, imports } = {}) => {
                     // eslint-disable-next-line no-param-reassign
                     decl.params = `'${mapping.get(key)}'`;
                 }
-            });
+            },
         },
     };
 };
