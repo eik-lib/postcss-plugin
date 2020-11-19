@@ -47,7 +47,7 @@
         "eslint-plugin-import": "2.22.1",
         "eslint-config-prettier": "^6.15.0",
         "fastify": "3.8.0",
-        "postcss": "8.1.7",
+        "postcss": "8.1.8",
         "rollup": "2.33.2",
         "semantic-release": "17.2.2",
         "tap": "14.10.8"
@@ -57,7 +57,7 @@
         "node-fetch": "^2.6.1"
     },
     "peerDependencies": {
-        "postcss": "^8.0.0"
+        "postcss": "^8.1.8"
     },
     "prettier": {
         "singleQuote": true,
