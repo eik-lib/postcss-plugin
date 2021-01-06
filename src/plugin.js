@@ -10,16 +10,27 @@ const notUrl = (url) => url.substr(0, 4) !== 'http';
 const notBare = (str) =>
     str.startsWith('/') || str.startsWith('./') || str.startsWith('../');
 
-async function readEikJSONMaps(eikJSONPath) {
+async function readJSONFile(path) {
     try {
-        const contents = await fs.promises.readFile(eikJSONPath);
-        const eikJSON = JSON.parse(contents);
-        if (typeof eikJSON['import-map'] === 'string')
-            return [eikJSON['import-map']];
-        return eikJSON['import-map'] || [];
+        const contents = await fs.promises.readFile(path);
+        return JSON.parse(contents);
     } catch (err) {
-        return [];
+        return {};
     }
+}
+
+async function readEikJSONMaps(eikJSONPath, pkgJSONPath) {
+    const eikJSON = await readJSONFile(eikJSONPath);
+    const pkgJSON = await readJSONFile(pkgJSONPath);
+
+    if (eikJSON.name && pkgJSON.eik) {
+        throw new Error('Eik configuration was defined in both in package.json and eik.json. You must specify one or the other.');
+    }
+
+    const config = { ...eikJSON, ...pkgJSON.eik };
+
+    if (typeof config['import-map'] === 'string') return [config['import-map']];
+    return config['import-map'] || [];
 }
 
 async function fetchImportMaps(urls = []) {
@@ -49,12 +60,13 @@ async function fetchImportMaps(urls = []) {
 // @TODO this could be a @eik/import-map-utils package
 async function populateImportMap({
     path: eikPath = path.join(process.cwd(), 'eik.json'),
+    packagePath = path.join(process.cwd(), 'package.json'),
     urls = [],
     imports = {},
 } = {}) {
     const mapping = new Map();
 
-    const importmapUrls = await readEikJSONMaps(eikPath);
+    const importmapUrls = await readEikJSONMaps(eikPath, packagePath);
     for (const map of importmapUrls) {
         urls.push(map);
     }
