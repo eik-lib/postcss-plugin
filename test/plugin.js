@@ -1,5 +1,8 @@
 import tap from 'tap';
 import postcss from 'postcss';
+import fs from 'fs';
+import path from 'path';
+import fastify from 'fastify';
 import plugin from '../src/plugin';
 
 const simple = `
@@ -106,3 +109,73 @@ tap.test(
         t.end();
     }
 );
+
+tap.test('plugin() - eik.json defined import maps', async (t) => {
+    const server = fastify();
+    server.get('/one', (request, reply) => {
+        reply.send({
+            imports: {
+                'normalize.css': [
+                    'https://unpkg.com/normalize.css@8/normalize.css',
+                    'https://unpkg.com/normalize.css@7/normalize.css',
+                ],
+            },
+        });
+    });
+    const address = await server.listen();
+
+    await fs.promises.writeFile(path.join(process.cwd(), 'eik.json'), JSON.stringify({
+        name: 'test',
+        version: '1.0.0',
+        js: '',
+        css: '',
+        'import-map': `${address}/one`,
+    }));
+
+    const { css } = await postcss(
+        plugin({
+            path: path.join(process.cwd(), 'eik.json')
+        })
+    ).process(simple, { from: undefined });
+
+    t.matchSnapshot(clean(css), 'import maps specified in eik.json');
+    await server.close();
+    await fs.promises.unlink(path.join(process.cwd(), 'eik.json'));
+    t.end();
+});
+
+tap.test('plugin() - package.json defined import maps', async (t) => {
+    const server = fastify();
+    server.get('/one', (request, reply) => {
+        reply.send({
+            imports: {
+                'normalize.css': [
+                    'https://unpkg.com/normalize.css@8/normalize.css',
+                    'https://unpkg.com/normalize.css@7/normalize.css',
+                ],
+            },
+        });
+    });
+    const address = await server.listen();
+
+    await fs.promises.writeFile(path.join(process.cwd(), 'pkg.json'), JSON.stringify({
+        eik: {
+            name: 'test',
+            version: '1.0.0',
+            js: '',
+            css: '',
+            'import-map': `${address}/one`,
+        },
+    }));
+
+    const { css } = await postcss(
+        plugin({
+            packagePath: path.join(process.cwd(), 'pkg.json')
+        })
+    ).process(simple, { from: undefined });
+
+    t.matchSnapshot(clean(css), 'import maps specified in package.json');
+    await server.close();
+    await fs.promises.unlink(path.join(process.cwd(), 'pkg.json'));
+    t.end();
+});

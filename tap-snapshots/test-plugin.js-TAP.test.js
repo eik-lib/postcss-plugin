@@ -11,7 +11,19 @@ exports[`test/plugin.js TAP plugin() - advanced module - should replace normaliz
 
 `
 
+exports[`test/plugin.js TAP plugin() - eik.json defined import maps > import maps specified in eik.json 1`] = `
+
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+
+`
+
 exports[`test/plugin.js TAP plugin() - import values is an Array - should use the first entry in the Array > first array entry 1`] = `
+
+  @import 'https://unpkg.com/normalize.css@8/normalize.css';
+
+`
+
+exports[`test/plugin.js TAP plugin() - package.json defined import maps > import maps specified in package.json 1`] = `
 
   @import 'https://unpkg.com/normalize.css@8/normalize.css';
 

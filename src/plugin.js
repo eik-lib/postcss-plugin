@@ -91,7 +91,7 @@ async function populateImportMap({
     return mapping;
 }
 
-module.exports = ({ path, urls, imports } = {}) => {
+module.exports = ({ path, packagePath, urls, imports } = {}) => {
     return {
         postcssPlugin: '@eik/postcss-import-map',
         prepare() {
@@ -100,7 +100,7 @@ module.exports = ({ path, urls, imports } = {}) => {
             // Only replace once per url
             const replaced = new Set();
             // Eagerly start resolving
-            const mapFetch = populateImportMap({ path, urls, imports });
+            const mapFetch = populateImportMap({ path, packagePath, urls, imports });
             // Reused replace logic
             const applyImportMap = (mapping, decl) => {
                 if (processed.has(decl)) {
