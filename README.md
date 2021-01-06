@@ -82,15 +82,60 @@ module.exports = (ctx) => ({
 });
 ```
 
+## Reading config from eik.json or package.json
+
+By default, this plugin will try to read config from your projects `eik.json` or `package.json` files in the root of the current working directory.
+
+The path to the location of an `eik.json` file can be specified with the `path` option.
+`path` defaults to the current working directory.
+
+```js
+module.exports = (ctx) => ({
+    plugins: [
+        require('@eik/postcss-import-map')({ path: '/path/to/eik.json' }),
+        require('postcss-import')({
+            // It needs to be added here as well to ensure everything is mapped
+            plugins: [
+                require('@eik/postcss-import-map')({
+                    path: '/path/to/eik.json',
+                }),
+            ],
+        }),
+    ],
+});
+```
+
+The path to the location of a `package.json` file can be specified with the `packagePath` option.
+`packagePath` defaults to the current working directory.
+
+```js
+module.exports = (ctx) => ({
+    plugins: [
+        require('@eik/postcss-import-map')({
+            packagePath: '/path/to/package.json',
+        }),
+        require('postcss-import')({
+            // It needs to be added here as well to ensure everything is mapped
+            plugins: [
+                require('@eik/postcss-import-map')({
+                    packagePath: '/path/to/package.json',
+                }),
+            ],
+        }),
+    ],
+});
+```
+
 ## Options
 
 This plugin takes an [import map](https://github.com/WICG/import-maps) as options:
 
-| option  | default        | type     | required | details                                                     |
-| ------- | -------------- | -------- | -------- | ----------------------------------------------------------- |
-| path    | `cwd/eik.json` | `string` | `false`  | Path to eik.json file.                                      |
-| urls    | `[]`           | `array`  | `false`  | Array of import map URLs to fetch from.                     |
-| imports | `{}`           | `object` | `false`  | Mapping between "bare" import specifiers and absolute URLs. |
+| option      | default            | type     | required | details                                                     |
+| ----------- | ------------------ | -------- | -------- | ----------------------------------------------------------- |
+| path        | `cwd/eik.json`     | `string` | `false`  | Path to eik.json file.                                      |
+| packagePath | `cwd/package.json` | `string` | `false`  | Path to package.json file.                                  |
+| urls        | `[]`               | `array`  | `false`  | Array of import map URLs to fetch from.                     |
+| imports     | `{}`               | `object` | `false`  | Mapping between "bare" import specifiers and absolute URLs. |
 
 This module only cares about "bare" import specifies which map to absolute
 URLs in the import map. Any other import specifiers defined in the import map
