@@ -1,9 +1,12 @@
 name: Release and Publish
 
 on:
-  pull_request:
   push:
-    branches: [master]
+    branches:
+      - master
+      - alpha
+      - beta
+      - next
 
 jobs:
   test:
@@ -18,14 +21,34 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: npm lint
+        env:
+          CI: true
+      - name: lint files
         run: |
           npm run lint
-      - name: npm test
+        env:
+          CI: true
+      - name: style check files
+        run: |
+          npm run style:check
+        env:
+          CI: true
+      - name: typecheck files
+        run: |
+          npm run typecheck
+        env:
+          CI: true
+      - name: check eik json schema is up to date
+        run: |
+          npm run schema:outdated
+        env:
+          CI: true
+      - name: run tests
         run: |
           npm test
+
   release:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    name: Release
     runs-on: ubuntu-latest
     needs: [test]
     steps:

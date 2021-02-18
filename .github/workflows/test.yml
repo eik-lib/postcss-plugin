@@ -15,13 +15,31 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install
+      - name: install dependencies
         run: |
           npm install
         env:
           CI: true
-      - name: Run tests
+      - name: lint files
         run: |
-          npm test
+          npm run lint
         env:
           CI: true
+      - name: style check files
+        run: |
+          npm run style:check
+        env:
+          CI: true
+      - name: typecheck files
+        run: |
+          npm run typecheck
+        env:
+          CI: true
+      - name: check eik json schema is up to date
+        run: |
+          npm run schema:outdated
+        env:
+          CI: true
+      - name: run tests
+        run: |
+          npm test
