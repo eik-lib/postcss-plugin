@@ -4,3 +4,4 @@ dist
 tmp
 test/plugin.mjs
 modules
+release.config.js

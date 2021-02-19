@@ -10,7 +10,7 @@ PostCSS [Eik](https://eik.dev/) plugin to support the use of import maps to map 
 ## Installation
 
 ```bash
-$ npm install @eik/postcss-import-map
+$ npm install @eik/postcss-plugin
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ $ npm install @eik/postcss-import-map
 // dependencies
 var fs = require('fs');
 var postcss = require('postcss');
-var eikImportMapPlugin = require('@eik/postcss-import-map');
+var plugin = require('@eik/postcss-plugin');
 
 // css to be processed
 var css = fs.readFileSync('css/input.css', 'utf8');
@@ -27,7 +27,7 @@ var css = fs.readFileSync('css/input.css', 'utf8');
 // process css
 postcss()
     .use(
-        eikImportMapPlugin({
+        plugin({
             imports: {
                 'normalize.css':
                     'https://unpkg.com/normalize.css@8/normalize.css',
@@ -73,10 +73,10 @@ If you're using [postcss-import](https://github.com/postcss/postcss-import) make
 ```js
 module.exports = (ctx) => ({
     plugins: [
-        require('@eik/postcss-import-map')(),
+        require('@eik/postcss-plugin')(),
         require('postcss-import')({
             // It needs to be added here as well to ensure everything is mapped
-            plugins: [require('@eik/postcss-import-map')],
+            plugins: [require('@eik/postcss-plugin')],
         }),
     ],
 });
@@ -92,11 +92,11 @@ The path to the location of an `eik.json` file can be specified with the `path` 
 ```js
 module.exports = (ctx) => ({
     plugins: [
-        require('@eik/postcss-import-map')({ path: '/path/to/eik.json' }),
+        require('@eik/postcss-plugin')({ path: '/path/to/eik.json' }),
         require('postcss-import')({
             // It needs to be added here as well to ensure everything is mapped
             plugins: [
-                require('@eik/postcss-import-map')({
+                require('@eik/postcss-plugin')({
                     path: '/path/to/eik.json',
                 }),
             ],
@@ -111,13 +111,13 @@ The path to the location of a `package.json` file can be specified with the `pac
 ```js
 module.exports = (ctx) => ({
     plugins: [
-        require('@eik/postcss-import-map')({
+        require('@eik/postcss-plugin')({
             packagePath: '/path/to/package.json',
         }),
         require('postcss-import')({
             // It needs to be added here as well to ensure everything is mapped
             plugins: [
-                require('@eik/postcss-import-map')({
+                require('@eik/postcss-plugin')({
                     packagePath: '/path/to/package.json',
                 }),
             ],

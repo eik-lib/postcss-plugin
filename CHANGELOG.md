@@ -1,3 +1,17 @@
+# [3.0.0-next.1](https://github.com/eik-lib/postcss-import-map/compare/v2.0.4...v3.0.0-next.1) (2021-02-18)
+
+
+### Features
+
+* Rename module to @eik/postcss-plugin ([#83](https://github.com/eik-lib/postcss-import-map/issues/83)) ([7efa758](https://github.com/eik-lib/postcss-import-map/commit/7efa758f4dc8162e4ca500a7628d7c80f4151b61))
+
+
+### BREAKING CHANGES
+
+* Rename module to @eik/postcss-plugin
+
+Co-authored-by: Trygve Lie <trygve.lie@finn.no>
+
 ## [2.0.4](https://github.com/eik-lib/postcss-import-map/compare/v2.0.3...v2.0.4) (2020-12-29)
 
 
