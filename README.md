@@ -1,11 +1,6 @@
-# postcss-import-map
+# @eik/postcss-plugin
 
 PostCSS [Eik](https://eik.dev/) plugin to support the use of import maps to map "bare" import specifiers in CSS @import rules.
-
-**Notes:**
-
--   **This plugin should probably be used as the first plugin of your list.**
--   **If you use `postcss-import` please [read this.](#postcss-import-usage)**
 
 ## Installation
 
@@ -16,36 +11,36 @@ $ npm install @eik/postcss-plugin
 ## Usage
 
 ```js
-// dependencies
-var fs = require('fs');
-var postcss = require('postcss');
-var plugin = require('@eik/postcss-plugin');
+const postcss = require('postcss');
+const plugin = require('@eik/postcss-plugin');
+const fs = require('fs');
 
-// css to be processed
-var css = fs.readFileSync('css/input.css', 'utf8');
+// CSS to be processed
+const css = fs.readFileSync('css/input.css', 'utf8');
 
-// process css
 postcss()
     .use(
-        plugin({
-            imports: {
-                'normalize.css':
-                    'https://unpkg.com/normalize.css@8/normalize.css',
-            },
-        })
+        plugin()
     )
     .process(css, {
         // `from` option is needed here
         from: 'css/input.css',
     })
     .then(function (result) {
-        var output = result.css;
-
-        console.log(output);
+        console.log(result.css);
     });
 ```
 
-`css/input.css`:
+## Description
+
+This plugin transforms "bare" import specifiers to absolute URL specifiers in
+CSS modules by applying an Import Map ahead of time.
+
+For a more detailed description of Import Maps, please see our [Import Maps section](https://eik.dev/docs/mapping_import_map).
+
+The main target for Import Maps is to map import statements in EcmaScript Modules but it can be applied to CSS import statements too.
+
+Given the following CSS:
 
 ```css
 @import 'normalize.css';
@@ -55,15 +50,110 @@ body {
 }
 ```
 
-will give you:
+when applaying the following Import Map:
+
+```json
+{
+    "imports": {
+        "normalize.css": "https://cdn.eik.dev/normalize.css@8/normalize.css",
+    },
+}
+```
+
+one will get a transformed CSS like so:
 
 ```css
-@import 'https://unpkg.com/normalize.css@8/normalize.css';
+@import 'https://cdn.eik.dev/normalize.css@8/normalize.css';
 
 body {
     background: black;
 }
 ```
+
+## Options
+
+This plugin takes the following as options:
+
+| option  | default        | type     | required | details                                                     |
+| ------- | -------------- | -------- | -------- | ----------------------------------------------------------- |
+| path    | `cwd/eik.json` | `string` | `false`  | Path to eik.json file.                                      |
+| urls    | `[]`           | `array`  | `false`  | Array of import map URLs to fetch from.                     |
+| maps    | `[]`           | `array`  | `false`  | Array of import map as objects.                             |
+
+The plugin will attempt to read import map URLs from [`eik.json` or `package.json`](https://eik.dev/docs/overview_eik_json) files in the root of the current working directory if present.
+
+```js
+postcss()
+    .use(
+        plugin()
+    )
+    .process(css, {...})
+    .then(...);
+```
+
+The path to the location of an `eik.json` file can be specified with the `path` option.
+
+```js
+postcss()
+    .use(
+        plugin({ path: '/path/to/eik-json-folder' })
+    )
+    .process(css, {...})
+    .then(...);
+```
+
+The plugin can also be told which URLs to load import maps from directly using the `urls` option.
+
+```js
+postcss()
+    .use(
+        plugin({ urls: 'http://myserver/import-map' })
+    )
+    .process(css, {...})
+    .then(...);
+```
+
+Additionally, individual mappings can be specified using the `maps` option.
+
+```js
+postcss()
+    .use(
+        plugin({
+            maps: [{
+                "imports": {
+                    "normalize.css": "https://cdn.eik.dev/normalize.css@8/normalize.css",
+                },
+            }],
+        })
+    )
+    .process(css, {...})
+    .then(...);
+```
+
+### Precedence
+
+If several of the options are used, `maps` takes precedence over `urls` which takes precedence over values loaded from an `eik.json` or `package.json` file.
+
+ie. in the following example
+
+```js
+postcss()
+    .use(
+        plugin({
+            path: '/path/to/eik-json-folder',
+            urls: ['http://myserver/import-map'],
+            maps: [{
+                "imports": {
+                    "normalize.css": "https://cdn.eik.dev/normalize.css@8/normalize.css",
+                },
+            }],
+        })
+    )
+    .process(css, {...})
+    .then(...);
+```
+
+Any import map URLs in `eik.json` will be loaded first, then merged with (and overridden if necessary by) the result of fetching from `http://myserver/import-map` before finally being merged with (and overriden if necessary by) specific mappings defined in `maps`.
 
 ## PostCSS Import Usage
 
@@ -81,65 +171,6 @@ module.exports = (ctx) => ({
     ],
 });
 ```
-
-## Reading config from eik.json or package.json
-
-By default, this plugin will try to read config from your projects `eik.json` or `package.json` files in the root of the current working directory.
-
-The path to the location of an `eik.json` file can be specified with the `path` option.
-`path` defaults to the current working directory.
-
-```js
-module.exports = (ctx) => ({
-    plugins: [
-        require('@eik/postcss-plugin')({ path: '/path/to/eik.json' }),
-        require('postcss-import')({
-            // It needs to be added here as well to ensure everything is mapped
-            plugins: [
-                require('@eik/postcss-plugin')({
-                    path: '/path/to/eik.json',
-                }),
-            ],
-        }),
-    ],
-});
-```
-
-The path to the location of a `package.json` file can be specified with the `packagePath` option.
-`packagePath` defaults to the current working directory.
-
-```js
-module.exports = (ctx) => ({
-    plugins: [
-        require('@eik/postcss-plugin')({
-            packagePath: '/path/to/package.json',
-        }),
-        require('postcss-import')({
-            // It needs to be added here as well to ensure everything is mapped
-            plugins: [
-                require('@eik/postcss-plugin')({
-                    packagePath: '/path/to/package.json',
-                }),
-            ],
-        }),
-    ],
-});
-```
-
-## Options
-
-This plugin takes an [import map](https://github.com/WICG/import-maps) as options:
-
-| option      | default            | type     | required | details                                                     |
-| ----------- | ------------------ | -------- | -------- | ----------------------------------------------------------- |
-| path        | `cwd/eik.json`     | `string` | `false`  | Path to eik.json file.                                      |
-| packagePath | `cwd/package.json` | `string` | `false`  | Path to package.json file.                                  |
-| urls        | `[]`               | `array`  | `false`  | Array of import map URLs to fetch from.                     |
-| imports     | `{}`               | `object` | `false`  | Mapping between "bare" import specifiers and absolute URLs. |
-
-This module only cares about "bare" import specifies which map to absolute
-URLs in the import map. Any other import specifiers defined in the import map
-are ignored.
 
 ## License
 
