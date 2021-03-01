@@ -74,11 +74,11 @@ body {
 
 This plugin takes the following as options:
 
-| option  | default        | type     | required | details                                                     |
-| ------- | -------------- | -------- | -------- | ----------------------------------------------------------- |
-| path    | `cwd/eik.json` | `string` | `false`  | Path to eik.json file.                                      |
-| urls    | `[]`           | `array`  | `false`  | Array of import map URLs to fetch from.                     |
-| maps    | `[]`           | `array`  | `false`  | Array of import map as objects.                             |
+| option  | default         | type     | required | details                                                                       |
+| ------- | --------------- | -------- | -------- | ----------------------------------------------------------------------------- |
+| path    | `process.cwd()` | `string` | `false`  | Path to directory containing a eik.json file or package.json with eik config. |
+| urls    | `[]`            | `array`  | `false`  | Array of import map URLs to fetch from.                                       |
+| maps    | `[]`            | `array`  | `false`  | Array of import map as objects.                                               |
 
 The plugin will attempt to read import map URLs from [`eik.json` or `package.json`](https://eik.dev/docs/overview_eik_json) files in the root of the current working directory if present.
 

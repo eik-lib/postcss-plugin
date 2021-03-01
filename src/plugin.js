@@ -52,7 +52,7 @@ module.exports = ({
             // Only replace once per url
             const replaced = new Set();
             // Eagerly start resolving
-            // const mapFetch = populateImportMap({ path, packagePath, urls, imports });
+
             // Reused replace logic
             const applyImportMap = (mapping, decl) => {
                 if (processed.has(decl)) {
@@ -92,13 +92,9 @@ module.exports = ({
                 async Once(root) {
                     // Load eik config from eik.json or package.json
                     const config = await helpers.getDefaults(path);
-                    const cUrls = [];
-                    for (const map of config.map) {
-                        cUrls.push(map);
-                    }
 
                     // Fetch import maps from the server
-                    const fetched = await fetchImportMaps([...cUrls, ...pUrls]);
+                    const fetched = await fetchImportMaps([...config.map, ...pUrls]);
                     
                     const allImportMaps = [...fetched, ...pMaps];
                     allImportMaps.forEach((item) => {
