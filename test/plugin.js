@@ -104,7 +104,7 @@ tap.test(
 tap.test('plugin() - eik.json defined import maps', async (t) => {
     const server = fastify();
     server.get('/one', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@8/normalize.css',
             },
@@ -136,7 +136,7 @@ tap.test('plugin() - eik.json defined import maps', async (t) => {
 tap.test('plugin() - Import map defined through constructor "maps" argument take precedence over import map defined in eik.json', async (t) => {
     const server = fastify();
     server.get('/one', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@7/normalize.css',
             },
@@ -175,14 +175,14 @@ tap.test('plugin() - Import map defined through constructor "maps" argument take
 tap.test('plugin() - Import map defined through constructor "urls" argument take precedence over import map defined in eik.json', async (t) => {
     const server = fastify();
     server.get('/one', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@7/normalize.css',
             },
         });
     });
     server.get('/two', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@8/normalize.css',
             },
@@ -218,14 +218,14 @@ tap.test('plugin() - Import map defined through constructor "urls" argument take
 tap.test('plugin() - Import map defined through constructor "maps" argument take precedence over import map defined through constructor "urls" argument', async (t) => {
     const server = fastify();
     server.get('/one', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@6/normalize.css',
             },
         });
     });
     server.get('/two', (request, reply) => {
-        reply.send(        {
+        reply.send({
             imports: {
                 'normalize.css': 'https://cdn.eik.dev/normalize.css@7/normalize.css',
             },
