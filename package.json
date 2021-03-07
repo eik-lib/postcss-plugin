@@ -47,7 +47,7 @@
         "eslint-plugin-import": "2.22.1",
         "eslint-config-prettier": "^8.0.0",
         "fastify": "3.13.0",
-        "postcss": "8.2.6",
+        "postcss": "8.2.7",
         "rollup": "2.40.0",
         "semantic-release": "17.4.0",
         "tap": "14.11.0"
