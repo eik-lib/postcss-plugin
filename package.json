@@ -48,7 +48,7 @@
         "eslint-config-prettier": "^8.0.0",
         "fastify": "3.14.0",
         "postcss": "8.2.8",
-        "rollup": "2.41.2",
+        "rollup": "2.42.1",
         "semantic-release": "17.4.2",
         "tap": "14.11.0"
     },
