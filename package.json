@@ -42,7 +42,7 @@
         "eslint-config-airbnb-base": "14.2.1",
         "eslint-plugin-import": "2.24.2",
         "eslint-config-prettier": "8.3.0",
-        "fastify": "3.21.0",
+        "fastify": "3.21.3",
         "postcss": "8.3.6",
         "rollup": "2.56.3",
         "semantic-release": "17.4.7",
