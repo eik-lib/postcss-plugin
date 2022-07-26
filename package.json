@@ -49,7 +49,7 @@
         "tap": "14.11.0"
     },
     "dependencies": {
-        "@eik/common": "4.0.0-next.4",
+        "@eik/common": "4.0.0-next.5",
         "css-url-parser": "1.1.3",
         "node-fetch": "2.6.7"
     },
