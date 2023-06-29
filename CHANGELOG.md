@@ -1,3 +1,10 @@
+## [3.0.11](https://github.com/eik-lib/postcss-import-map/compare/v3.0.10...v3.0.11) (2023-06-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency node-fetch to v2.6.12 ([3eae0c2](https://github.com/eik-lib/postcss-import-map/commit/3eae0c2a55e1418144d9384a154864673c83e684))
+
 ## [3.0.10](https://github.com/eik-lib/postcss-import-map/compare/v3.0.9...v3.0.10) (2023-05-28)
 
 
