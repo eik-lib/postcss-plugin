@@ -1,46 +1,47 @@
 /* eslint-disable no-restricted-syntax, no-shadow */
 
 const parseCssUrls = require('css-url-parser');
-const { helpers } = require('@eik/common');
+const { getDefaults } = require('@eik/common-config-loader');
 const fetch = require('node-fetch');
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
 
 async function fetchImportMaps(urls = []) {
     try {
-        const maps = urls.map((map) => fetch(map).then((result) => {
-            if (result.status === 404) {
-                throw new Error('Import map could not be found on server');
-            } else if (result.status >= 400 && result.status < 500) {
-                throw new Error('Server rejected client request');
-            } else if (result.status >= 500) {
-                throw new Error('Server error');
-            }
-            return result.json();
-        }));
+        const maps = urls.map((map) =>
+            fetch(map).then((result) => {
+                if (result.status === 404) {
+                    throw new Error('Import map could not be found on server');
+                } else if (result.status >= 400 && result.status < 500) {
+                    throw new Error('Server rejected client request');
+                } else if (result.status >= 500) {
+                    throw new Error('Server error');
+                }
+                return result.json();
+            })
+        );
         return await Promise.all(maps);
     } catch (err) {
         throw new Error(
-            `Unable to load import map file from server: ${err.message}`,
+            `Unable to load import map file from server: ${err.message}`
         );
     }
 }
 
-const validate = (map) => Object.keys(map.imports).map((key) => {
-    const value = map.imports[key];
-   
-    if (notUrl(value)) {
-        throw Error(`Import specifier can NOT be mapped to a bare import statement. Import specifier "${key}" is being wrongly mapped to "${value}"`);
-    }
+const validate = (map) =>
+    Object.keys(map.imports).map((key) => {
+        const value = map.imports[key];
 
-    return { key, value };
-});
+        if (notUrl(value)) {
+            throw Error(
+                `Import specifier can NOT be mapped to a bare import statement. Import specifier "${key}" is being wrongly mapped to "${value}"`
+            );
+        }
 
-module.exports = ({
-    path = process.cwd(),
-    maps = [],
-    urls = [],
-} = {}) => {
+        return { key, value };
+    });
+
+module.exports = ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
     const pMaps = Array.isArray(maps) ? maps : [maps];
     const pUrls = Array.isArray(urls) ? urls : [urls];
 
@@ -91,18 +92,21 @@ module.exports = ({
                 // Run initially once, this is to ensure it runs before postcss-import
                 async Once(root) {
                     // Load eik config from eik.json or package.json
-                    const config = await helpers.getDefaults(path);
+                    const config = await getDefaults(path);
 
                     // Fetch import maps from the server
-                    const fetched = await fetchImportMaps([...config.map, ...pUrls]);
-                    
+                    const fetched = await fetchImportMaps([
+                        ...config.map,
+                        ...pUrls,
+                    ]);
+
                     const allImportMaps = [...fetched, ...pMaps];
                     allImportMaps.forEach((item) => {
                         const i = validate(item);
                         i.forEach((obj) => {
                             mapping.set(obj.key, obj.value);
                         });
-                    });;
+                    });
 
                     root.walkAtRules('import', (decl) => {
                         applyImportMap(mapping, decl);
