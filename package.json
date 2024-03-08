@@ -46,7 +46,7 @@
         "postcss": "8.4.31",
         "rollup": "4.12.1",
         "semantic-release": "23.0.2",
-        "tap": "18.7.0"
+        "tap": "18.7.1"
     },
     "dependencies": {
         "@eik/common-config-loader": "4.0.0-next.12",
