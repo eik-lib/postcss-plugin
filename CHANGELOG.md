@@ -1,3 +1,18 @@
+# [4.0.0](https://github.com/eik-lib/postcss-import-map/compare/v3.0.14...v4.0.0) (2024-07-29)
+
+
+### Code Refactoring
+
+* migrate to esm ([4e8bc12](https://github.com/eik-lib/postcss-import-map/commit/4e8bc1299323afb2ee7e74eb4d97d85869f5c904))
+* remove node-fetch dependency ([8113805](https://github.com/eik-lib/postcss-import-map/commit/81138057c767bdecfeec96db017ddf25942e8458))
+
+
+### BREAKING CHANGES
+
+* this requires using Node 18 or newer without the
+--no-experimental-fetch flag.
+* module is now ESM
+
 ## [3.0.14](https://github.com/eik-lib/postcss-import-map/compare/v3.0.13...v3.0.14) (2024-03-06)
 
 
