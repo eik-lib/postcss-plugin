@@ -1,37 +1,37 @@
 name: Release and Publish
 
 on:
-    push:
-        branches:
-            - main
-            - alpha
-            - beta
-            - next
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+      - next
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-            - name: Install dependencies
-              run: npm install
+      - name: Install dependencies
+        run: npm install
 
-            - name: Lint files
-              run: npm run lint
+      - name: Lint files
+        run: npm run lint
 
-            - name: Run tests
-              run: npm run test
+      - name: Run tests
+        run: npm run test
 
-            - name: Run semantic release
-              run: npx semantic-release
-              env:
-                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Run semantic release
+        run: npx semantic-release
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

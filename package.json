@@ -1,63 +1,61 @@
 {
-    "name": "@eik/postcss-plugin",
-    "version": "3.0.14",
-    "description": "PostCSS plugin that uses Eik defined import map files to transform bare import specifiers to absolute URLs in @import rules",
-    "main": "src/plugin.js",
-    "files": [
-        "CHANGELOG.md",
-        "package.json",
-        "src/"
-    ],
-    "scripts": {
-        "test": "tap test/*.js --disable-coverage --allow-empty-coverage",
-        "test:snapshot": "TAP_SNAPSHOT=1 tap test/*.js --disable-coverage --allow-empty-coverage",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/eik-lib/postcss-import-map.git"
-    },
-    "keywords": [
-        "css",
-        "postcss",
-        "postcss-plugin",
-        "import",
-        "url"
-    ],
-    "author": "Finn.no",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/eik-lib/postcss-import-map/issues"
-    },
-    "homepage": "https://github.com/eik-lib/postcss-import-map#readme",
-    "devDependencies": {
-        "@semantic-release/changelog": "6.0.3",
-        "@semantic-release/commit-analyzer": "13.0.0",
-        "@semantic-release/git": "10.0.1",
-        "@semantic-release/github": "10.1.3",
-        "@semantic-release/npm": "12.0.1",
-        "@semantic-release/release-notes-generator": "14.0.1",
-        "eslint": "8.57.0",
-        "eslint-config-airbnb-base": "15.0.0",
-        "eslint-plugin-import": "2.29.1",
-        "eslint-config-prettier": "9.1.0",
-        "fastify": "4.28.1",
-        "postcss": "8.4.40",
-        "rollup": "4.19.1",
-        "semantic-release": "24.0.0",
-        "tap": "20.0.3"
-    },
-    "dependencies": {
-        "@eik/common-config-loader": "4.0.0-next.12",
-        "css-url-parser": "1.1.3",
-        "node-fetch": "2.7.0"
-    },
-    "peerDependencies": {
-        "postcss": "^8.0.0"
-    },
-    "prettier": {
-        "singleQuote": true,
-        "tabWidth": 4
-    }
+  "name": "@eik/postcss-plugin",
+  "version": "3.0.14",
+  "description": "PostCSS plugin that uses Eik defined import map files to transform bare import specifiers to absolute URLs in @import rules",
+  "main": "src/plugin.js",
+  "type": "module",
+  "files": [
+    "CHANGELOG.md",
+    "package.json",
+    "src/"
+  ],
+  "scripts": {
+    "test": "tap test/*.js --disable-coverage --allow-empty-coverage",
+    "test:snapshot": "TAP_SNAPSHOT=1 tap test/*.js --disable-coverage --allow-empty-coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eik-lib/postcss-import-map.git"
+  },
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-plugin",
+    "import",
+    "url"
+  ],
+  "author": "Finn.no",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eik-lib/postcss-import-map/issues"
+  },
+  "homepage": "https://github.com/eik-lib/postcss-import-map#readme",
+  "devDependencies": {
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "13.0.0",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "10.1.3",
+    "@semantic-release/npm": "12.0.1",
+    "@semantic-release/release-notes-generator": "14.0.1",
+    "eslint": "9.6.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.1.3",
+    "fastify": "4.28.1",
+    "globals": "15.8.0",
+    "postcss": "8.4.40",
+    "rollup": "4.19.1",
+    "semantic-release": "24.0.0",
+    "prettier": "3.3.3",
+    "tap": "20.0.3"
+  },
+  "dependencies": {
+    "@eik/common-config-loader": "4.0.0-next.12",
+    "css-url-parser": "1.1.3",
+    "node-fetch": "2.7.0"
+  },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
+  }
 }

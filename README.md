@@ -19,9 +19,7 @@ const fs = require('fs');
 const css = fs.readFileSync('css/input.css', 'utf8');
 
 postcss()
-    .use(
-        plugin()
-    )
+    .use(plugin())
     .process(css, {
         // `from` option is needed here
         from: 'css/input.css',
@@ -55,8 +53,8 @@ when applaying the following Import Map:
 ```json
 {
     "imports": {
-        "normalize.css": "https://cdn.eik.dev/normalize.css@8/normalize.css",
-    },
+        "normalize.css": "https://cdn.eik.dev/normalize.css@8/normalize.css"
+    }
 }
 ```
 
@@ -74,11 +72,11 @@ body {
 
 This plugin takes the following as options:
 
-| option  | default         | type     | required | details                                                                       |
-| ------- | --------------- | -------- | -------- | ----------------------------------------------------------------------------- |
-| path    | `process.cwd()` | `string` | `false`  | Path to directory containing a eik.json file or package.json with eik config. |
-| urls    | `[]`            | `array`  | `false`  | Array of import map URLs to fetch from.                                       |
-| maps    | `[]`            | `array`  | `false`  | Array of import map as objects.                                               |
+| option | default         | type     | required | details                                                                       |
+| ------ | --------------- | -------- | -------- | ----------------------------------------------------------------------------- |
+| path   | `process.cwd()` | `string` | `false`  | Path to directory containing a eik.json file or package.json with eik config. |
+| urls   | `[]`            | `array`  | `false`  | Array of import map URLs to fetch from.                                       |
+| maps   | `[]`            | `array`  | `false`  | Array of import map as objects.                                               |
 
 The plugin will attempt to read import map URLs from [`eik.json` or `package.json`](https://eik.dev/docs/overview_eik_json) files in the root of the current working directory if present.
 
