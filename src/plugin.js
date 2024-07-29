@@ -1,6 +1,6 @@
-const parseCssUrls = require('css-url-parser');
-const { getDefaults } = require('@eik/common-config-loader');
-const fetch = require('node-fetch');
+import parseCssUrls from 'css-url-parser';
+import { getDefaults } from '@eik/common-config-loader';
+import fetch from 'node-fetch';
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
 
@@ -39,7 +39,7 @@ const validate = (map) =>
         return { key, value };
     });
 
-module.exports = ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
+export default ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
     const pMaps = Array.isArray(maps) ? maps : [maps];
     const pUrls = Array.isArray(urls) ? urls : [urls];
 
@@ -117,5 +117,3 @@ module.exports = ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
         },
     };
 };
-
-module.exports.postcss = true;

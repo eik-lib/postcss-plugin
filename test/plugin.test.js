@@ -1,11 +1,9 @@
-'use strict';
-
-const postcss = require('postcss');
-const fastify = require('fastify');
-const path = require('path');
-const tap = require('tap');
-const fs = require('fs');
-const plugin = require('..');
+import postcss from 'postcss';
+import fastify from 'fastify';
+import path from 'path';
+import tap from 'tap';
+import fs from 'fs';
+import plugin from '../src/plugin.js';
 
 const simple = `
   @import 'normalize.css';
@@ -124,7 +122,10 @@ tap.test('plugin() - eik.json defined import maps', async (t) => {
             },
         });
     });
-    const address = await server.listen();
+    const address = await server.listen({
+        host: '0.0.0.0',
+        port: 52345,
+    });
 
     await fs.promises.writeFile(
         path.join(process.cwd(), 'eik.json'),
@@ -162,7 +163,10 @@ tap.test(
                 },
             });
         });
-        const address = await server.listen();
+        const address = await server.listen({
+            host: '0.0.0.0',
+            port: 52345,
+        });
 
         await fs.promises.writeFile(
             path.join(process.cwd(), 'eik.json'),
@@ -221,7 +225,10 @@ tap.test(
                 },
             });
         });
-        const address = await server.listen();
+        const address = await server.listen({
+            host: '0.0.0.0',
+            port: 52345,
+        });
 
         await fs.promises.writeFile(
             path.join(process.cwd(), 'eik.json'),
@@ -273,7 +280,10 @@ tap.test(
                 },
             });
         });
-        const address = await server.listen();
+        const address = await server.listen({
+            host: '0.0.0.0',
+            port: 52345,
+        });
 
         await fs.promises.writeFile(
             path.join(process.cwd(), 'eik.json'),
