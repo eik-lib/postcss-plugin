@@ -39,9 +39,9 @@
     "@semantic-release/github": "10.1.3",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
-    "eslint": "9.6.0",
+    "eslint": "9.8.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.1.3",
+    "eslint-plugin-prettier": "5.2.1",
     "fastify": "4.28.1",
     "globals": "15.8.0",
     "postcss": "8.4.40",
@@ -52,8 +52,7 @@
   },
   "dependencies": {
     "@eik/common-config-loader": "4.0.0-next.12",
-    "css-url-parser": "1.1.3",
-    "node-fetch": "2.7.0"
+    "css-url-parser": "1.1.3"
   },
   "peerDependencies": {
     "postcss": "^8.0.0"

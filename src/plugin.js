@@ -1,6 +1,5 @@
 import parseCssUrls from 'css-url-parser';
 import { getDefaults } from '@eik/common-config-loader';
-import fetch from 'node-fetch';
 
 const notUrl = (url) => url.substr(0, 4) !== 'http';
 
