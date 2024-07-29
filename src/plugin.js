@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax, no-shadow */
-
 const parseCssUrls = require('css-url-parser');
 const { getDefaults } = require('@eik/common-config-loader');
 const fetch = require('node-fetch');
@@ -18,12 +16,12 @@ async function fetchImportMaps(urls = []) {
                     throw new Error('Server error');
                 }
                 return result.json();
-            })
+            }),
         );
         return await Promise.all(maps);
     } catch (err) {
         throw new Error(
-            `Unable to load import map file from server: ${err.message}`
+            `Unable to load import map file from server: ${err.message}`,
         );
     }
 }
@@ -34,7 +32,7 @@ const validate = (map) =>
 
         if (notUrl(value)) {
             throw Error(
-                `Import specifier can NOT be mapped to a bare import statement. Import specifier "${key}" is being wrongly mapped to "${value}"`
+                `Import specifier can NOT be mapped to a bare import statement. Import specifier "${key}" is being wrongly mapped to "${value}"`,
             );
         }
 
@@ -64,7 +62,6 @@ module.exports = ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
                 // First check if it's possibly using syntax like url()
                 const parsedUrls = parseCssUrls(decl.params);
                 if (parsedUrls.length > 0) {
-                    // eslint-disable-next-line prefer-destructuring
                     key = parsedUrls[0];
                 } else {
                     // Handle the common cases where it's not wrapped in url() but may have quotes
@@ -77,7 +74,6 @@ module.exports = ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
                 if (replaced.has(key)) {
                     decl.remove();
                 } else if (mapping.has(key)) {
-                    // eslint-disable-next-line no-param-reassign
                     decl.params = `'${mapping.get(key)}'`;
                     replaced.add(key);
                 }
