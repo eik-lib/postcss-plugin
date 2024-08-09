@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/eik-lib/postcss-import-map/compare/v4.0.0...v4.0.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* include type definitions ([7ad7a16](https://github.com/eik-lib/postcss-import-map/commit/7ad7a16ea7f4ca246383cf1b8797f45b0dd2995d))
+
 # [4.0.0](https://github.com/eik-lib/postcss-import-map/compare/v3.0.14...v4.0.0) (2024-07-29)
 
 
