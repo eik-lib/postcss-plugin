@@ -46,7 +46,7 @@
     "eslint": "9.8.0",
     "fastify": "4.28.1",
     "npm-run-all2": "5.0.0",
-    "postcss": "8.4.40",
+    "postcss": "8.4.41",
     "prettier": "3.3.3",
     "rimraf": "6.0.1",
     "rollup": "4.20.0",
