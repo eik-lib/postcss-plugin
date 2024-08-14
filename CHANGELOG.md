@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/eik-lib/postcss-import-map/compare/v4.0.3...v4.0.4) (2024-08-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/common to v4.1.0 ([e42abaa](https://github.com/eik-lib/postcss-import-map/commit/e42abaa216cc5a7f33e3ea4016006385a03be00f))
+
 ## [4.0.3](https://github.com/eik-lib/postcss-import-map/compare/v4.0.2...v4.0.3) (2024-08-13)
 
 
