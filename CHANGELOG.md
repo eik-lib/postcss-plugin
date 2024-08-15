@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/eik-lib/postcss-import-map/compare/v4.0.4...v4.0.5) (2024-08-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency css-url-parser to v1.1.4 ([8533ede](https://github.com/eik-lib/postcss-import-map/commit/8533edec716125d56c806098e006116693bfc0a7))
+
 ## [4.0.4](https://github.com/eik-lib/postcss-import-map/compare/v4.0.3...v4.0.4) (2024-08-14)
 
 
