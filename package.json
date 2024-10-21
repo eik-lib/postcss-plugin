@@ -45,7 +45,7 @@
     "@eik/typescript-config": "1.0.0",
     "eslint": "9.13.0",
     "fastify": "4.28.1",
-    "npm-run-all2": "5.0.2",
+    "npm-run-all2": "6.2.5",
     "postcss": "8.4.47",
     "prettier": "3.3.3",
     "rimraf": "6.0.1",
