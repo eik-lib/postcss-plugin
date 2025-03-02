@@ -52,7 +52,7 @@
     "rollup": "4.34.9",
     "semantic-release": "24.2.3",
     "tap": "20.0.3",
-    "typescript": "5.7.3"
+    "typescript": "5.8.2"
   },
   "dependencies": {
     "@eik/common": "4.1.1",
