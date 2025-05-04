@@ -44,7 +44,7 @@
     "@eik/semantic-release-config": "1.0.2",
     "@eik/typescript-config": "1.0.0",
     "eslint": "9.26.0",
-    "fastify": "4.29.1",
+    "fastify": "5.3.2",
     "npm-run-all2": "5.0.2",
     "postcss": "8.5.3",
     "prettier": "3.5.3",
