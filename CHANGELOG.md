@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/eik-lib/postcss-plugin/compare/v4.0.6...v5.0.0) (2025-05-08)
+
+
+### Bug Fixes
+
+* update eik/common for shared map fetcher ([#485](https://github.com/eik-lib/postcss-plugin/issues/485)) ([ce6c67a](https://github.com/eik-lib/postcss-plugin/commit/ce6c67af24c17f4429f0695e949226c17db8f66f))
+
+
+### BREAKING CHANGES
+
+* Drop support for Node 18.
+
 ## [4.0.6](https://github.com/eik-lib/postcss-import-map/compare/v4.0.5...v4.0.6) (2024-08-16)
 
 
