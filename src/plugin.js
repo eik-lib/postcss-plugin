@@ -13,32 +13,6 @@ const notUrl = (url) => url.substr(0, 4) !== "http";
  */
 
 /**
- * @param {string[]} urls
- * @returns {Promise<ImportMap[]>}
- */
-async function fetchImportMaps(urls = []) {
-	try {
-		const maps = urls.map((map) =>
-			fetch(map).then((result) => {
-				if (result.status === 404) {
-					throw new Error("Import map could not be found on server");
-				} else if (result.status >= 400 && result.status < 500) {
-					throw new Error("Server rejected client request");
-				} else if (result.status >= 500) {
-					throw new Error("Server error");
-				}
-				return /** @type {Promise<ImportMap>} */ (result.json());
-			}),
-		);
-		return await Promise.all(maps);
-	} catch (err) {
-		throw new Error(
-			`Unable to load import map file from server: ${err.message}`,
-		);
-	}
-}
-
-/**
  * @param {ImportMap} map
  * @returns {Array<{ key: string; value: string; }>}
  */
@@ -135,10 +109,13 @@ export default ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
 				// Run initially once, this is to ensure it runs before postcss-import
 				async Once(root) {
 					// Load eik config from eik.json or package.json
-					const config = await helpers.getDefaults(path);
+					const config = helpers.getDefaults(path);
 
 					// Fetch import maps from the server
-					const fetched = await fetchImportMaps([...config.map, ...pUrls]);
+					const fetched = await helpers.fetchImportMaps([
+						...config.map,
+						...pUrls,
+					]);
 
 					const allImportMaps = [...fetched, ...pMaps];
 					allImportMaps.forEach((item) => {
