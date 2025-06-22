@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/eik-lib/postcss-plugin#readme",
   "devDependencies": {
-    "@eik/eslint-config": "1.0.16",
+    "@eik/eslint-config": "1.0.17",
     "@eik/prettier-config": "1.0.1",
     "@eik/semantic-release-config": "1.0.4",
     "@eik/typescript-config": "1.0.0",
