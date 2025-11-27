@@ -50,7 +50,7 @@
     "prettier": "3.6.2",
     "rimraf": "6.1.2",
     "rollup": "4.53.3",
-    "semantic-release": "24.2.9",
+    "semantic-release": "25.0.2",
     "tap": "21.1.6",
     "typescript": "5.9.3"
   },
