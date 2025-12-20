@@ -1,6 +1,6 @@
 {
   "name": "@eik/postcss-plugin",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "description": "PostCSS plugin that uses Eik defined import map files to transform bare import specifiers to absolute URLs in @import rules",
   "main": "src/plugin.js",
   "types": "./types/plugin.d.ts",
