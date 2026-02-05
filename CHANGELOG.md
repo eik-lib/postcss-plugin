@@ -1,3 +1,10 @@
+## [5.0.10](https://github.com/eik-lib/postcss-plugin/compare/v5.0.9...v5.0.10) (2026-02-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/common to v5.1.14 ([#590](https://github.com/eik-lib/postcss-plugin/issues/590)) ([a1c6fb2](https://github.com/eik-lib/postcss-plugin/commit/a1c6fb2e3f6056b2b9b11ddebbb6a65b59bb5f12))
+
 ## [5.0.9](https://github.com/eik-lib/postcss-plugin/compare/v5.0.8...v5.0.9) (2026-01-08)
 
 
