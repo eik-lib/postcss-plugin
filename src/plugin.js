@@ -1,6 +1,8 @@
 import parseCssUrls from "css-url-parser";
 import { helpers } from "@eik/common";
 
+const RE_WEBPACK_TILDE = /^~/;
+
 /**
  * @param {string} url
  * @returns {boolean}
@@ -89,7 +91,7 @@ export default ({ path = process.cwd(), maps = [], urls = [] } = {}) => {
 				}
 
 				// Webpack interop
-				key = key.replace(/^~/, "");
+				key = key.replace(RE_WEBPACK_TILDE, "");
 
 				if (replaced.has(key)) {
 					decl.remove();
