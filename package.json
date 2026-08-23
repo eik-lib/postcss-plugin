@@ -55,7 +55,7 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@eik/common": "5.2.0",
+    "@eik/common": "5.2.1",
     "css-url-parser": "1.1.4"
   },
   "peerDependencies": {
