@@ -49,7 +49,7 @@
     "postcss": "8.5.32",
     "prettier": "3.9.10",
     "rimraf": "6.1.4",
-    "rollup": "4.67.2",
+    "rollup": "4.68.0",
     "semantic-release": "25.0.9",
     "tap": "21.8.1",
     "typescript": "7.0.2"
