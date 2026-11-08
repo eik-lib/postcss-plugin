@@ -51,7 +51,7 @@
     "rimraf": "6.1.4",
     "rollup": "4.67.2",
     "semantic-release": "25.0.9",
-    "tap": "21.8.0",
+    "tap": "21.8.1",
     "typescript": "7.0.2"
   },
   "dependencies": {
